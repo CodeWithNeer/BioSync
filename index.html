@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tagline</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Boldonse&family=Hubot+Sans:ital,wght@0,200..900;1,200..900&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'hubot sans', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #f5f5f5;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background-color: rgba(20, 20, 20, 0.8);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        h1 {
+            font-family: 'boldonse';
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 100;
+            letter-spacing: 1.5px;
+        }
+
+        .tagline {
+            font-style: italic;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .input-section {
+            padding: 30px;
+            background-color: rgba(25, 25, 25, 0.6);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 400;
+            color: #e0e0e0;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: rgba(45, 45, 45, 0.7);
+            color: #f5f5f5;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border 0.3s, background-color 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba(55, 55, 55, 0.7);
+            outline: none;
+        }
+
+        button {
+            background-color: rgba(60, 60, 60, 0.8);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-weight: 500;
+            display: block;
+            margin: 0 auto;
+        }
+
+        button:hover {
+            background-color: rgba(80, 80, 80, 0.8);
+        }
+
+        .output-section {
+            padding: 30px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            color: #aaa;
+        }
+
+        .tab.active {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .content-tabs {
+            margin-top: 15px;
+        }
+
+        .content-tab {
+            padding: 8px 16px;
+            cursor: pointer;
+            background-color: rgba(40, 40, 40, 0.7);
+            border-radius: 20px;
+            margin-right: 10px;
+            display: inline-block;
+            margin-bottom: 10px;
+            transition: background-color 0.2s;
+        }
+
+        .content-tab.active {
+            background-color: rgba(80, 80, 80, 0.9);
+            color: white;
+        }
+
+        .bio-content {
+            background-color: rgba(35, 35, 35, 0.7);
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 20px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(50, 50, 50, 0.8);
+            color: #ddd;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .copy-btn:hover {
+            background-color: rgba(70, 70, 70, 0.8);
+        }
+
+        .refresh-btn {
+            background-color: transparent;
+            color: #bbb;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .refresh-btn:hover {
+            background-color: rgba(60, 60, 60, 0.5);
+            color: #fff;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+
+            header,
+            .input-section,
+            .output-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Tagline</h1>
+            <p class="tagline">Unique bios, endless possibilities</p>
+        </header>
+
+        <div class="input-section">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" placeholder="e.g., Jane Doe">
+            </div>
+
+            <div class="form-group">
+                <label for="profession">What You Do</label>
+                <input type="text" id="profession" placeholder="e.g., Full Stack Developer, UX Designer">
+            </div>
+
+            <div class="form-group">
+                <label for="vibe">Your Interests & Style</label>
+                <textarea id="vibe" rows="3" placeholder="e.g., coffee, AI, minimalism, photography, travel"></textarea>
+            </div>
+
+            <button id="generateBtn">Generate Bio</button>
+        </div>
+
+        <div class="output-section hidden" id="outputSection">
+            <div class="tabs">
+                <div class="tab active" data-platform="twitter">Twitter/X</div>
+                <div class="tab" data-platform="github">GitHub</div>
+                <div class="tab" data-platform="linkedin">LinkedIn</div>
+                <div class="tab" data-platform="portfolio">Portfolio</div>
+            </div>
+
+            <div class="content-tabs">
+                <div class="content-tab active" data-tone="professional">Professional</div>
+                <div class="content-tab" data-tone="creative">Creative</div>
+                <div class="content-tab" data-tone="minimal">Minimal</div>
+                <div class="content-tab" data-tone="quirky">Quirky</div>
+            </div>
+
+            <div class="bio-content">
+                <p id="bioText"></p>
+                <button class="copy-btn" id="copyBtn">Copy</button>
+            </div>
+
+            <button id="refreshBtn" class="refresh-btn">Generate Another Bio</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const generateBtn = document.getElementById('generateBtn');
+            const refreshBtn = document.getElementById('refreshBtn');
+            const outputSection = document.getElementById('outputSection');
+            const bioText = document.getElementById('bioText');
+            const copyBtn = document.getElementById('copyBtn');
+            const tabs = document.querySelectorAll('.tab');
+            const contentTabs = document.querySelectorAll('.content-tab');
+
+            let currentPlatform = 'twitter';
+            let currentTone = 'professional';
+            let userData = {};
+
+            // Switch between platform tabs
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    currentPlatform = this.dataset.platform;
+                    generateAndDisplayBio();
+                });
+            });
+
+            // Switch between tone tabs
+            contentTabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    contentTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    currentTone = this.dataset.tone;
+                    generateAndDisplayBio();
+                });
+            });
+
+            // Generate bio when button is clicked
+            generateBtn.addEventListener('click', function () {
+                const name = document.getElementById('name').value.trim();
+                const profession = document.getElementById('profession').value.trim();
+                const vibe = document.getElementById('vibe').value.trim();
+
+                if (!name || !profession || !vibe) {
+                    alert('Please fill in all fields to generate your bio.');
+                    return;
+                }
+
+                userData = {
+                    name: name,
+                    profession: profession,
+                    vibe: vibe
+                };
+
+                outputSection.classList.remove('hidden');
+                generateAndDisplayBio();
+
+                // Scroll to output section
+                outputSection.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Refresh bio when button is clicked
+            refreshBtn.addEventListener('click', function () {
+                generateAndDisplayBio();
+            });
+
+            // Copy bio text to clipboard
+            copyBtn.addEventListener('click', function () {
+                const textToCopy = bioText.textContent;
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = 'Copied!';
+                    setTimeout(() => {
+                        copyBtn.textContent = originalText;
+                    }, 2000);
+                });
+            });
+
+            // Generate and display bio based on current selections
+            function generateAndDisplayBio() {
+                if (!userData.name) return;
+
+                const generatedBio = generateRandomBio(
+                    userData.name,
+                    userData.profession,
+                    userData.vibe,
+                    currentPlatform,
+                    currentTone
+                );
+
+                bioText.textContent = generatedBio;
+            }
+
+            // Generate random bio based on inputs and selected platform/tone
+            function generateRandomBio(name, profession, vibe, platform, tone) {
+                // Extract keywords from vibe
+                const keywords = extractKeywords(vibe);
+
+                // Get random structures based on platform and tone
+                const structures = getBioStructures(platform, tone);
+                const structure = pickRandomItem(structures);
+
+                // Replace placeholders with actual content
+                let bio = structure;
+
+                // Replace name placeholder
+                bio = bio.replace(/\{name\}/g, name);
+
+                // Replace profession placeholder
+                bio = bio.replace(/\{profession\}/g, profession);
+
+                // Replace various keyword placeholders
+                while (bio.includes('{keyword}')) {
+                    bio = bio.replace('{keyword}', pickRandomItem(keywords));
+                }
+
+                while (bio.includes('{keywords2}')) {
+                    bio = bio.replace('{keywords2}', combineKeywords(keywords, 2));
+                }
+
+                while (bio.includes('{keywords3}')) {
+                    bio = bio.replace('{keywords3}', combineKeywords(keywords, 3));
+                }
+
+                // Replace emoji placeholders
+                const emojis = ['✨', '👋', '🚀', '💡', '🌱', '👾', '🔍', '🎯', '🎮', '☕', '📚', '🌍', '⚡', '💻', '🎨', '🏆'];
+                while (bio.includes('{emoji}')) {
+                    bio = bio.replace('{emoji}', pickRandomItem(emojis));
+                }
+
+                return bio;
+            }
+
+            // Helper function to extract keywords from vibe text
+            function extractKeywords(vibeText) {
+                // Split by common separators and filter out empty strings
+                const separators = [',', ';', '•', '|', '/', '&', '+', '.', '-'];
+                let parts = [vibeText];
+
+                for (const sep of separators) {
+                    let newParts = [];
+                    for (const part of parts) {
+                        newParts = [...newParts, ...part.split(sep)];
+                    }
+                    parts = newParts;
+                }
+
+                return parts
+                    .map(p => p.trim())
+                    .filter(p => p.length > 0 && p.length < 20) // Avoid full sentences
+                    .filter(p => !['and', 'or', 'with', 'the'].includes(p.toLowerCase()));
+            }
+
+            // Helper function to pick a random item from an array
+            function pickRandomItem(array) {
+                if (!array || array.length === 0) return '';
+                return array[Math.floor(Math.random() * array.length)];
+            }
+
+            // Helper function to combine keywords
+            function combineKeywords(keywords, count = 2) {
+                if (!keywords || keywords.length === 0) return '';
+
+                // Clone and shuffle array
+                const shuffled = [...keywords].sort(() => 0.5 - Math.random());
+
+                // Take first 'count' items or all if less than count
+                const selected = shuffled.slice(0, Math.min(count, shuffled.length));
+
+                // Join with random connector
+                const connectors = [' & ', ' | ', ' • ', ' + '];
+                const connector = pickRandomItem(connectors);
+                return selected.join(connector);
+            }
+
+            // Define different bio structures for each platform and tone
+            function getBioStructures(platform, tone) {
+                const structures = {
+                    twitter: {
+                        professional: [
+                            "{profession} focused on {keyword}. Building solutions for {keyword}.",
+                            "Creating {keyword} experiences through {profession}.",
+                            "{profession} specializing in {keywords2}.",
+                            "Exploring the intersection of {keyword} and {keyword}.",
+                            "{profession} | {keyword} advocate | {keyword} explorer",
+                            "{profession} bridging {keyword} and {keyword} to create real-world impact.",
+                            "Building better {keyword} through solid {profession} practices.",
+                            "{profession} at the forefront of {keywords2}.",
+                            "Driven by {keyword}, grounded in {profession}.",
+                            "{profession} making {keyword} smarter, faster, and simpler.",
+                            "Helping brands scale with {keyword} and strategy as a {profession}.",
+                            "Translating ideas into results through {keyword} and {profession}."
+
+                        ],
+                        creative: [
+                            "Turning {keyword} into {keyword} as a {profession}.",
+                            "{emoji} {profession} with a passion for {keywords2}",
+                            "When not {keyword}, I'm {profession} with {keyword} in mind.",
+                            "{profession} by day, {keyword} enthusiast by night.",
+                            "{emoji} {profession} crafting {keyword} solutions",
+                            "{emoji} {profession} remixing {keyword} into magic.",
+                            "Fueling my {profession} with too much coffee and {keyword}.",
+                            "Dreaming in {keyword}, building in {profession}.",
+                            "I make {keyword} feel human. That’s my {profession} superpower.",
+                            "{profession} turning wild ideas into {keyword}.",
+                            "{emoji} {profession} in a love-hate relationship with {keyword}.",
+                            "Designing {keyword} with vibes, not just logic."
+
+                        ],
+                        minimal: [
+                            "{name}. {profession}. {keyword}.",
+                            "{profession}. {keywords2}.",
+                            "{keyword} | {profession}",
+                            "{keyword}. {keyword}. {profession}.",
+                            "{profession} @ {keyword}",
+                            "{name} | {profession} | Curious about {keyword}",
+                            "{keyword}. {profession}. Obsessed.",
+                            "{profession} • {keyword} • {keyword}",
+                            "{profession} @ the intersection of {keyword} & {keyword}",
+                            "Mostly {keyword}, always {profession}.",
+                            "{profession} = {keyword} + {keyword}",
+                            "{profession} ~ {keyword}"
+
+                        ],
+                        quirky: [
+                            "Professional {keyword} wrangler disguised as a {profession}.",
+                            "Equal parts {profession} and {keyword} enthusiast.",
+                            "Probably thinking about {keyword} while {keyword}.",
+                            "{profession} with a concerning amount of {keyword} references.",
+                            "{emoji} Making {keyword} less complicated since birth",
+                            "{profession}, powered by chaos and {keyword}.",
+                            "{emoji} May or may not be turning {keyword} into my personality.",
+                            "100% {keyword}, 0% chill. Also a {profession}.",
+                            "Functioning adult. Barely. Also a {profession}.",
+                            "Officially certified to make {keyword} overly complicated.",
+                            "{profession} with a PhD in {keyword} memes.",
+                            "I break {keyword} so you don’t have to."
+
+                        ]
+                    },
+                    github: {
+                        professional: [
+                            "# {name}\n\n{profession} working with {keywords2}.\n\nCurrently exploring {keyword}.",
+                            "# Hello, I'm {name}\n\n{profession} focused on {keywords2}.\n\nBuilding solutions that matter.",
+                            "# {name}\n\n{profession} specializing in {keywords2}.\n\nLet's collaborate on {keyword} projects.",
+                            "# {profession}\n\nCrafting {keyword} solutions.\n\nExperienced in {keywords2}.",
+                            "# {name}\n\n{profession} passionate about {keywords2}.\n\nContinuously learning and growing.",
+                            "# {name}\n\nDriven {profession} building with {keywords2}.",
+                            "# {name}\n\nSolving real-world problems using {keywords2}.",
+                            "# {name}\n\n{profession} passionate about clean code and {keywords2}.",
+                            "# {profession}\n\nInnovating through {keyword}.\nOpen to collaboration.",
+                            "# {name}\n\n{profession} creating scalable solutions in {keywords2}.",
+                            "# Hello!\n\nI'm {name}, a {profession} skilled in {keywords2}.",
+                            "# {name}\n\nAdvancing tech through {profession} and {keywords2}."
+                        ],
+                        creative: [
+                            "# {emoji} Hello, world!\n\n{profession} who thinks about {keyword} too much.\n\nCrafting digital {keyword} one line at a time.",
+                            "# < {name} />\n\n{emoji} {profession} exploring the realms of {keywords2}\n\nCurrently building something with {keyword}",
+                            "# {name}'s Digital Garden\n\n{profession} cultivating {keywords2}.\n\nPlanting seeds of {keyword}.",
+                            "# {emoji} {name}\n\n{profession} with a focus on {keywords2}.\n\nTurning caffeine into {keyword} since forever.",
+                            "# Welcome to my code universe!\n\n{profession} orbiting around {keywords2}.\n\nGravitating towards {keyword}.",
+                            "# {emoji} Meet my alter ego\n\n{name} the {profession}, coding dreams into {keyword}.",
+                            "# {name}\n\nCreating beautiful chaos with {keywords2}.",
+                            "# {emoji} Building bugs and calling it {keyword}.",
+                            "# {name}'s GitHub Garden\n\nPlanting seeds of {keywords2} with style.",
+                            "# {name}\n\n{profession} by title, digital dreamer by night.",
+                            "# <code/>{keyword}\n\nJust another {profession} chasing ideas.",
+                            "# {emoji} Sometimes I code, sometimes I just vibe with {keyword}.",
+                        ],
+                        minimal: [
+                            "{name}\n{profession}\n{keywords3}",
+                            "# {name}\n{profession}\n{keyword}",
+                            "{profession}\n{keywords2}",
+                            "# {emoji}\n{name}\n{profession}\n{keyword}",
+                            "{name} ({profession})\n{keywords2}",
+                            "# {name}\n{profession}\n{keywords2}",
+                            "{emoji}\n{name}\n{profession}",
+                            "{profession} • {keyword}",
+                            "{name} | {profession}\n{keyword}",
+                            "{profession}\n• {keywords3}",
+                            "# {emoji}\n{profession}\n{keywords2}",
+                            "{name} ({keyword})",
+                        ],
+                        quirky: [
+                            "# 404: work-life balance not found\n\n{profession} who's probably thinking about {keyword} right now.\n\nIf my code is working, don't touch it.",
+                            "# import {name} as awesome\n\n{profession} trying to explain {keyword} to my cat.\n\nSpoiler: The cat doesn't care.",
+                            "# while(alive) { code(); }\n\n{profession} with equal parts {keyword} and {keyword}.\n\nExistence is just an edge case.",
+                            "# sudo apt-get install {keyword}\n\n{profession} who turns {keyword} into {keyword}.\n\nTrying to automate everything including my social life.",
+                            "# git commit -m \"fixed bugs and created new ones\"\n\n{profession} specializing in {keywords2}.\n\nProbably debugging something right now.",
+                            "# coffee > sleep\n\n{profession} obsessed with {keyword} problems.",
+                            "# def life():\n return {keyword}\n\n{profession} with curly braces and chaos.",
+                            "# git push --force my brain\n\n{profession} with a flair for {keyword}.",
+                            "# print('hello world')\n\nThen panic.\n\n{profession} in progress.",
+                            "# pip install drama\n\n{profession} living in {keyword} loops.",
+                            "# Is this code or a cry for help?\n\n{profession} wrangling {keyword} daily.",
+                            "# CTRL + Z doesn’t work in life\n\nTrust me, I'm a {profession}."
+                        ]
+                    },
+                    linkedin: {
+                        professional: [
+                            "{profession} with expertise in {keywords2}. Passionate about delivering solutions that drive impact in {keyword} spaces.",
+                            "Experienced {profession} specializing in {keywords2}. Dedicated to creating value through thoughtful implementation and strategic thinking.",
+                            "{profession} focused on {keywords2}. Combining technical knowledge with business acumen to deliver results.",
+                            "Results-driven {profession} with a background in {keyword}. Skilled in {keywords2} with a commitment to excellence.",
+                            "{profession} leveraging {keywords2} to solve complex challenges. Experienced in delivering solutions that make a difference.",
+                            "{profession} solving challenges in {keywords2} with empathy and precision.",
+                            "Strategic {profession} passionate about driving innovation through {keywords2}.",
+                            "Results-focused {profession} applying {keywords2} to real-world problems.",
+                            "{profession} with experience in delivering scalable {keyword} solutions.",
+                            "Empowering change in {keyword} through sharp {profession} skills.",
+                            "{profession} unlocking the value in {keywords2} with intention.",
+                            "Helping teams thrive through {profession} leadership and {keyword} insights."
+                        ],
+                        creative: [
+                            "Blending {profession} skills with a passion for {keywords2}. Creating experiences that resonate and solutions that last.",
+                            "{profession} with a creative approach to {keywords2}. Turning challenges into opportunities through innovative thinking.",
+                            "Storytelling through {profession}. Crafting narratives in {keywords2} that engage and inspire.",
+                            "{profession} who sees connections between {keywords2}. Building bridges between technology and human experience.",
+                            "Creative {profession} exploring the possibilities of {keywords2}. Bringing fresh perspectives to familiar challenges.",
+                            "Curious {profession} with a love for unexpected {keywords2} solutions.",
+                            "Crafting meaning through {profession}, driven by {keywords2} inspiration.",
+                            "Passion meets profession. Making {keywords2} work beautifully.",
+                            "{profession} mixing intuition with {keywords2} execution.",
+                            "Creating business value with heart, brain, and {keyword}.",
+                            "{profession} with a storyteller’s lens and {keywords2} toolkit.",
+                            "Inspired by people, powered by {keywords2}, grounded in {profession}."
+                        ],
+                        minimal: [
+                            "{name} | {profession} | {keywords2}",
+                            "{profession} working with {keywords2}",
+                            "{profession} specializing in {keywords2}",
+                            "{name} • {profession} • {keyword}",
+                            "{profession} | {keywords2}",
+                            "{name} | {profession} | {keyword}",
+                            "{profession} @ {keyword}",
+                            "{profession} | Exploring {keywords2}",
+                            "{name} • {profession} • {keywords2}",
+                            "{profession} who loves {keyword}",
+                            "{name} | Builds with {keywords2}",
+                            "{profession} | {keywords2} | Curious mind"
+                        ],
+                        quirky: [
+                            "{profession} who believes {keyword} should be approached with both seriousness and humor. Exploring the balance of {keywords2}.",
+                            "When I'm not {profession}, I'm probably thinking about {keywords2}. Professional problem-solver with a side of {keyword}.",
+                            "{profession} by title, {keyword} enthusiast by nature. Turning complex ideas into simple solutions with a dash of {keyword}.",
+                            "Equal parts {profession}, {keyword} advocate, and {keyword} enthusiast. Building a career at the intersection of passion and purpose.",
+                            "Not your typical {profession}. Approaching {keywords2} with creativity, curiosity, and occasionally, {keyword}.",
+                            "{profession} who writes {keyword} like poetry and breaks it just as often.",
+                            "Here to disrupt {keyword}, politely and professionally.",
+                            "{profession} with a soft spot for {keyword} and strong coffee.",
+                            "If {keyword} were a language, I’d be fluent. Also, {profession}.",
+                            "Built different. Probably debugged it too. {profession} with quirks.",
+                            "Living proof that {keyword} and {profession} can coexist.",
+                            "{profession} on paper, {keyword} dreamer in reality."
+                        ]
+                    },
+                    portfolio: {
+                        professional: [
+                            "Hello, I'm {name}.\n\nA {profession} specializing in {keywords2}.\n\nI create solutions that combine innovation with practicality.",
+                            "{name} — {profession}\n\nFocused on delivering excellence in {keywords2}.\n\nLet's build something remarkable together.",
+                            "I'm {name}, a {profession} with expertise in {keywords2}.\n\nTurning complex challenges into elegant solutions.",
+                            "{name} | {profession}\n\nSpecializing in {keywords2}.\n\nDriven by purpose, guided by principles.",
+                            "Welcome. I'm {name}.\n\nA {profession} working with {keywords2}.\n\nCreating impact through thoughtful execution.",
+                            "Hi, I'm {name}.\n\nA {profession} dedicated to excellence in {keywords2}.",
+                            "{name} — Your next {profession}\n\nExperienced in {keywords2}.",
+                            "{profession} creating clarity through {keywords2}.",
+                            "Passionate about solving {keyword} through {profession} work.",
+                            "{name}\n\nHelping organizations grow with {keywords2}.",
+                            "Driven to transform {keywords2} into business value.",
+                            "{name} | Turning visions into outcomes using {keywords2}."
+                        ],
+                        creative: [
+                            "Hello there—I'm {name}.\n\n{profession} crafting experiences at the intersection of {keywords2}.\n\nInspired by {keyword}, driven by purpose.",
+                            "{name}\n\n{profession} weaving {keywords2} into meaningful experiences.\n\nCreating digital tapestries that engage and inspire.",
+                            "Welcome to my creative space.\n\nI'm {name}, a {profession} who explores {keywords2}.\n\nLet's create something meaningful together.",
+                            "{emoji} {name}\n\n{profession} blending {keywords2} to create experiences that resonate.\n\nAlways curious, forever learning.",
+                            "I'm {name}—{profession} and creator.\n\nMy work lives at the intersection of {keywords2}.\n\nInspired by {keyword}, shaped by purpose.",
+                            "{name} — {emoji} Explorer of {keywords2}.\n\nFueled by imagination, rooted in {profession}.",
+                            "I’m {name}, a {profession} designing meaningful {keywords2} experiences.",
+                            "Bringing playful precision to the world of {keywords2}.",
+                            "{emoji} Let’s make the internet more human.\n\nOne {keyword} at a time.",
+                            "{name}\n\n{profession} spinning stories through {keywords2}.",
+                            "Design-led. Detail-obsessed. Always up for weird {keyword} ideas.",
+                            "{name} — Just enough chaos to make {keywords2} fun."
+                        ],
+                        minimal: [
+                            "{name}.\n{profession}.\n{keywords2}.",
+                            "{name}\n{profession}\n{keyword}",
+                            "{profession}.\n{keywords2}.",
+                            "{name}—{profession}—{keyword}.",
+                            "{name}\n{profession}\n{keywords2}",
+                            "{name} | {profession}",
+                            "{profession}\n{keywords2}",
+                            "{name}\n{keyword}",
+                            "{name} — {profession} • {keyword}",
+                            "{emoji} {profession}\n{keyword}",
+                            "{profession}\n{keyword} | {keyword}",
+                            "{name} • {keywords2}"
+                        ],
+                        quirky: [
+                            "Oh, hello there!\n\nI'm {name}, a {profession} who thinks too much about {keywords2}.\n\nWhen not overthinking, I'm creating things.",
+                            "Welcome to my digital playground.\n\nI'm {name}—{profession}, {keyword} enthusiast, and professional {keyword} overthinker.",
+                            "{emoji} Well, you found me!\n\n{name} here. {profession} by trade, {keyword} enthusiast by choice.\n\nLet's make something unnecessarily complicated together.",
+                            "Fancy meeting you here.\n\nI'm {name}, a {profession} with an unhealthy obsession with {keywords2}.\n\nI promise my work is better than my jokes.",
+                            "Against all odds, you've discovered my portfolio.\n\n{name}—{profession} who spends too much time thinking about {keywords2}.\n\nYes, I'm available for hire.",
+                            "Welcome to the rabbit hole.\n\nI’m {name}, a {profession} with too many tabs open.",
+                            "{emoji} {name} here!\n\n{profession} by day, {keyword} chaos manager by night.",
+                            "I turn {keyword} mess into portfolio magic.\n\nHire me or roast my code.",
+                            "Built this to avoid actual social interaction. {profession}, not extrovert.",
+                            "{name} — Powered by snacks, {keyword}, and inconsistent sleep.",
+                            "{emoji} Warning: Side effects include unsolicited {keyword} ideas.",
+                            "Let’s be real.\n\nThis portfolio was built on 1% inspiration, 99% {keyword} panic."
+                        ]
+                    }
+                };
+
+                return structures[platform][tone];
+            }
+        });
+    </script>
+</body>
+
+</html>
