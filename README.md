@@ -1,4 +1,4 @@
-# BioSync
+# Tagline
 
 No more boring "Tech enthusiast | Coffee addict ☕" bios.
 Click, generate, and get a bio that actually makes you sound interesting.
